@@ -24,4 +24,9 @@ export class GeographyService {
     return this.httpClient
     .get<any>(this.endpoint+'/query/search_cp/'+zipCode+`?limit=${limit}&token=${this.token}`);
   }
+
+  getZipcodeInfo(zipCode:string): Observable<any> {
+    return this.httpClient
+    .get<any>(this.endpoint+'/query/info_cp/'+zipCode+'?type=simplified'+`&token=${this.token}`);
+  }
 }

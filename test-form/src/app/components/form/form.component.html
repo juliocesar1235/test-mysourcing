@@ -1,53 +1,100 @@
-<div [hidden]="submitted">
-  <h1>Hero Form</h1>
-<form (ngSubmit)="onSubmit()" #testForm="ngForm">
-<div class="form-group" >
-  <label for="name">Nombre</label>
-  <input type="text" class="form-control" id="name"
-         required
-         [(ngModel)]="model.name" name="name">
+<div class="main-container">
+  <div class="form-container">
+    <h1>Formulario</h1>
+  <form (ngSubmit)="onSubmit()" #testForm="ngForm">
+  <div class="form-group" >
+    <label for="name">Nombre</label>
+    <input type="text" class="form-control" id="name"
+          required
+          [(ngModel)]="model.name" name="name">
+  </div>
+
+  <div class="form-group">
+    <label for="firstName">Primer apellido</label>
+    <input type="text" class="form-control" id="firstName"
+          required
+          [(ngModel)]="model.firstName" name="firstName">
+  </div>
+
+  <div class="form-group">
+    <label for="lastName">Segundo apellido</label>
+    <input type="text" class="form-control" id="lastName"
+          required
+          [(ngModel)]="model.lastName" name="lastName">
+  </div>
+
+  <div class="form-group">
+    <label for="email">Correo electronico</label>
+    <input type="text" class="form-control" id="email"
+          required
+          [(ngModel)]="model.email" name="email">
+  </div>
+
+  <div class="form-group">
+    <label for="phoneNumber">Numero de telefono</label>
+    <input type="text"  class="form-control" id="phoneNumber"
+          [(ngModel)]="model.phoneNumber" name="phoneNumber">
+  </div>
+
+  <div class="form-group">
+    <label for="zipCode">Codigo postal</label>
+          <mat-form-field>
+            <input type="text" class="form-control" id="zipCode" matInput placeholder="Codigo postal" [(ngModel)]="model.zipCode" name="zipCode" required [matAutocomplete]="zipcodeGroup" (input)="validateZipCode($event)"> 
+            <mat-autocomplete #zipcodeGroup="matAutocomplete" (optionSelected)="setState($event)">
+                <mat-option *ngFor="let zipcode of zipcodes | async" [value]="zipcode">
+                  {{zipcode}}
+                </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+  </div>
+
+
+
+  <div class="form-group">
+    <label for="state">Estado federal</label>
+    <input type="text"  class="form-control" id="state"
+          [(ngModel)]="model.state" name="state" disabled>
+  </div>
+  <button type="submit" class="btn btn-success" [disabled]="!testForm.form.valid">Submit</button>
+  </form>
+  </div>
+  <div>
+    <h3>Datos capturados</h3>
+    <div class="capture-data">
+      <div class="caputre-field">
+        <span>Nombre:</span>
+        <span>{{model.name}}</span>
+      </div>
+      <div class="capture-field">
+        <span>Primer apellido:</span>
+        <span>{{model.firstName}}</span>
+      </div>
+      <div class="capture-field">
+        <span>Segundo apellido:</span>
+        <span>{{model.lastName}}</span>
+      </div>
+      <div class="capture-field">
+        <span>Correo electronico:</span>
+        <span>{{model.email}}</span>
+      </div>
+      <div class="capture-field">
+        <span>Numero de telefono:</span>
+        <span>{{model.phoneNumber}}</span>
+      </div>
+      <div class="capture-field">
+        <span>Codigo postal:</span>
+        <span>{{model.zipCode}}</span>
+      </div>
+      <div class="capture-field">
+        <span>Estado:</span>
+        <span>{{model.state}}</span>
+      </div>
+    </div>
+  </div>
 </div>
-
-<div class="form-group">
-  <label for="firstName">Primer apellido</label>
-  <input type="text" class="form-control" id="firstName"
-         required
-         [(ngModel)]="model.firstName" name="firstName">
-</div>
-
-<div class="form-group">
-  <label for="lastName">Segundo apellido</label>
-  <input type="text" class="form-control" id="lastName"
-         required
-         [(ngModel)]="model.lastName" name="lastName">
-</div>
-
-<div class="form-group">
-  <label for="email">Correo electronico</label>
-  <input type="text" class="form-control" id="email"
-         required
-         [(ngModel)]="model.email" name="email">
-</div>
-
-<div class="form-group">
-  <label for="phoneNumber">Numero de telefono</label>
-  <input type="text"  class="form-control" id="phoneNumber"
-         [(ngModel)]="model.phoneNumber" name="phoneNumber">
-</div>
-
-<div class="form-group">
-  <label for="zipCode">Codigo postal</label>
-  <input type="text"  class="form-control" id="zipCode"
-         [(ngModel)]="model.zipCode" name="zipCode" (input)="validateZipCode($event)">
-</div>
-
-
-
-<div class="form-group">
-  <label for="state">Estado federal</label>
-  <input type="text"  class="form-control" id="state"
-         [(ngModel)]="model.state" name="state">
-</div>
-<button type="submit" class="btn btn-success" [disabled]="!testForm.form.valid">Submit</button>
-</form>
+<div>
+  <h2>Usuarios guardados</h2>
+  <ng-container *ngFor="let user of users">
+    <app-user-card [user]="user"/>
+  </ng-container>
 </div>

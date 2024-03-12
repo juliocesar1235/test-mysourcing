@@ -23,7 +23,7 @@ export class UserService {
 
   createUser(newUser: User): Observable<any> {
     return this.httpClient
-    .post<any>();
+    .post<any>(this.endpoint+'/api/createUser.php', newUser);
   }
 
 }

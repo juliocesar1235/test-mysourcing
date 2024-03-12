@@ -1,1 +1,19 @@
 @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
+.main-container {
+  display: flex;
+}
+
+.form-container {
+  width: 30%;
+  margin-right: 20rem;
+}
+
+.capture-data {
+  display: grid;
+  width: 30%;
+}
+
+.capture-field {
+  display: flex;
+}
